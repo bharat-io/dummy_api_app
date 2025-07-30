@@ -1,5 +1,6 @@
 import 'package:api_testing_app/api_service.dart';
 import 'package:api_testing_app/model/post_model.dart';
+import 'package:api_testing_app/screens/commets_screen.dart';
 import 'package:api_testing_app/util/app_contant.dart';
 import 'package:flutter/material.dart';
 
@@ -99,6 +100,20 @@ class _PostsScreenState extends State<PostsScreen> {
                                       ),
                                       Text("#${post.tags.last}"),
                                     ],
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CommentsScreen()));
+                                    },
+                                    child: Text(
+                                      "see comments..",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.blueAccent),
+                                    ),
                                   )
                                 ],
                               ),

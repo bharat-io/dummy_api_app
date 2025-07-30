@@ -14,7 +14,7 @@ class PostModel {
   factory PostModel.fromJson(Map<String, dynamic> json) {
     List<Posts> postList = [];
     for (Map<String, dynamic> eachPost in json["posts"]) {
-      var eachModel = Posts.fromJson(eachPost);
+      Posts eachModel = Posts.fromJson(eachPost);
       postList.add(eachModel);
     }
     return PostModel(
