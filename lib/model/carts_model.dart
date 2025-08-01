@@ -61,6 +61,28 @@ class Carts {
       totalQuantity: json["totalQuantity"],
     );
   }
+
+//only for db
+  factory Carts.fromDbMap(Map<String, dynamic> map, List<Products> products) {
+    return Carts(
+      id: map["id"],
+      userId: map["userId"],
+      total: map["total"],
+      discountedTotal: map["discountedTotal"],
+      totalProducts: products.length,
+      totalQuantity: products.fold(0, (sum, p) => sum + p.quantity),
+      products: products,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "userId": userId,
+      "total": total,
+      "discountedTotal": discountedTotal,
+    };
+  }
 }
 
 class Products {
@@ -95,4 +117,30 @@ class Products {
         discountedTotal: json["discountedTotal"],
         thumbnail: json["thumbnail"]);
   }
+
+  //only for db
+  Map<String, dynamic> toMap(int cartId) {
+    return {
+      "id": id,
+      "cartId": cartId,
+      "title": title,
+      "price": price,
+      "quantity": quantity,
+      "total": total,
+      "discountPercentage": discountPercentage,
+      "discountedTotal": discountedTotal,
+      "thumbnail": thumbnail,
+    };
+  }
+
+  factory Products.fromDbMap(Map<String, dynamic> map) => Products(
+        id: map["id"],
+        title: map["title"],
+        price: map["price"],
+        quantity: map["quantity"],
+        total: map["total"],
+        discountPercentage: map["discountPercentage"],
+        discountedTotal: map["discountedTotal"],
+        thumbnail: map["thumbnail"],
+      );
 }

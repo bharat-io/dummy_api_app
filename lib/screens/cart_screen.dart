@@ -1,4 +1,5 @@
 import 'package:api_testing_app/api_service.dart';
+import 'package:api_testing_app/cart_repository.dart';
 import 'package:api_testing_app/model/carts_model.dart';
 import 'package:api_testing_app/util/app_contant.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ApiService apiService = ApiService();
+    CartRepository cartRepository = CartRepository();
 
     return Scaffold(
       appBar: AppBar(
@@ -16,10 +18,7 @@ class CartScreen extends StatelessWidget {
         title: const Text("Carts"),
       ),
       body: FutureBuilder<CartsModel?>(
-        future: apiService.getData<CartsModel>(
-          url: "${AppContant.baseUrl}/carts",
-          fromjson: (json) => CartsModel.fromjson(json),
-        ),
+        future: cartRepository.getCarts(),
         builder: (context, snapShot) {
           if (snapShot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
